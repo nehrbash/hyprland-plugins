@@ -515,6 +515,8 @@ void CHyprBar::renderPass(PHLMONITOR pMonitor, const float& a) {
         if (windowBox.w < 1 || windowBox.h < 1)
             return;
 
+        // The compositor's blur pass can leave stencil writes disabled.
+        glStencilMask(0xFF);
         glClearStencil(0);
         glClear(GL_STENCIL_BUFFER_BIT);
 
