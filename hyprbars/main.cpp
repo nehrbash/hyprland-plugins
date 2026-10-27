@@ -191,6 +191,8 @@ int newLuaButton(lua_State* L) {
     return 0;
 }
 
+void initDragAnchor(HANDLE handle);
+
 APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     PHANDLE = handle;
 
@@ -203,6 +205,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         throw std::runtime_error("[hb] Version mismatch");
     }
 
+    initDragAnchor(handle);
     g_pGlobalState                    = makeUnique<SGlobalState>();
     g_pGlobalState->nobarRuleIdx      = Desktop::Rule::windowEffects()->registerEffect("hyprbars:no_bar");
     g_pGlobalState->barColorRuleIdx   = Desktop::Rule::windowEffects()->registerEffect("hyprbars:bar_color");
